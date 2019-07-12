@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+	<meta charset="UTF-8">
+	<title>搬瓦工流量使用情况</title>
+	<link rel="stylesheet" href="./base.css">
+	<script src="https://cdn.bootcss.com/jquery/3.4.1/jquery.min.js
+	"></script>
+</head>
+
+<body>
+
+	<div>
+		<h1>panel</h1>
+		<br>
+		<br>
+		<!-- nouns -->
+		<div class="noun-box">
+			<div>
+				<div class="ram">
+					<div class="ram-used"></div>
+				</div>
+				<p>RAM</p>
+			</div>
+
+			<div>
+				<div class="disk">
+					<div class="disk-used"></div>
+				</div>
+				<p>DISK</p>
+			</div>
+
+			<div>
+
+				<div class="data">
+					<div class="data-used"></div>
+				</div>
+
+				<p>DATA</p>
+			</div>
+
+		</div>
+
+		<!-- details -->
+		<div class="details">
+			<p>主机信息请求中...</p>
+		</div>
+		<hr>
+		<p class="footer">©CopyRight 2019 Author 1396956549@qq.com</p>
+
+	</div>
+	<script>
+		// get elements
+		var ramUsed = $('.ram-used')[0];
+		var diskUsed = $('.disk-used')[0];
+		var dataUsed = $('.data-used')[0];
+		var detailsBox = $('.details')[0];
+
+		var xhr = new XMLHttpRequest();
+		xhr.open("get", "http://www.kkboom.cn:9999/kiwi", true);
+
+		xhr.send();
+
+		xhr.onreadystatechange = function () {
+			if (xhr.readyState == 4) {
+				var res = xhr.responseText;
+				var r = JSON.parse(JSON.parse(res).res);
+				// console.log(r);
+
+
+				// left-infos
+				var ram = (r.mem_available_kb / 1024).toFixed(2) + 'M';
+				var disk = ((r.plan_disk - r.ve_used_disk_space_b) / 1024 / 1024 / 1024).toFixed(2) + 'G';
+				var data = ((r.plan_monthly_data - r.data_counter) / 1024 / 1024 / 1024).toFixed(2) + 'G';
+				// status-infos
+				var status = r.ve_status;
+				var nextReset = new Date(r.data_next_reset * 1000).toLocaleDateString();
+				var ip = r.ip_addresses[0];
+				var location = r.node_datacenter;
+				var os = r.os;
+
+				var infos = { ram, disk, data, status, nextReset, ip, location, os };
+
+				// console.log(infos);
+
+				ramUsed.style.height = parseInt(240 * (r.plan_ram - r.mem_available_kb * 1024) / r.plan_ram) + 'px';
+				diskUsed.style.height = parseInt(240 * r.ve_used_disk_space_b / r.plan_disk) + 'px';
+				dataUsed.style.height = parseInt(240 * r.data_counter / r.plan_monthly_data) + 'px';
+
+
+				// details
+				var details = `<p>主机IP：` + infos.ip + `</p>
+								<p>主机状态：`+ infos.status + `</p>
+								<p>数据流量重置时间：`+ infos.nextReset + `</p>
+								<p>机房位置：`+ infos.location + `</p>
+								<p>操作系统：`+ infos.os + `</p>`
+				detailsBox.innerHTML = "";
+				detailsBox.innerHTML = details;
+
+
+				var span1 = document.createElement('span');
+				var span2 = document.createElement('span');
+				var span3 = document.createElement('span');
+				span1.innerHTML = '可用:' + '<br>' + infos.ram;
+				span2.innerHTML = '可用:' + '<br>' + infos.disk;
+				span3.innerHTML = '可用:' + '<br>' + infos.data;
+
+				$('.ram')[0].appendChild(span1);
+				$('.disk')[0].appendChild(span2);
+				$('.data')[0].appendChild(span3);
+
+			}
+		}
+	</script>
+</body>
+
+</html>

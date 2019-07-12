@@ -1,0 +1,87 @@
+@import url('https://fonts.googleapis.com/css?family=Montserrat:300,900&display=swap')
+
+html,body
+	margin:0
+	padding:0
+	color: #ffffff
+	text-align: center
+	background-color: rgb(45,56,67)
+	font-family: 'Montserrat', sans-serif
+
+%noun-shared
+	width: 80px
+	height: 240px
+	border-radius: 10px
+	position: relative
+	text-align: center
+	font-size: 12px
+	span
+		display: inline-block
+		margin-top: 20px
+
+%noun-used-shared
+	width: 80px	
+	border-bottom-left-radius: 10px
+	border-bottom-right-radius: 10px
+	position: absolute
+	bottom: 0
+	height: 0
+	transition: 1s ease
+
+
+.noun-box
+	display: flex
+	justify-content: space-between
+	align-items: center
+	max-width: 500px
+	margin: 0 auto
+
+// RAM
+.ram
+	@extend %noun-shared
+	border: 1px solid #435d6c
+
+// disk
+.disk
+	@extend %noun-shared
+	border: 1px solid #ef4b4c
+
+// data
+.data
+	@extend %noun-shared
+	border: 1px solid #3d619b
+
+// details
+.details
+	text-align: left
+	max-width: 500px
+	font-size: 12px
+	margin: 0 auto
+
+
+// ram-used
+.ram-used
+	@extend %noun-used-shared
+	background-color: #435d6c
+
+// ram-used
+.disk-used
+	@extend %noun-used-shared
+	background-color: #ef4b4c
+
+// ram-used
+.data-used
+	@extend %noun-used-shared
+	background-color: #3d619b
+
+.footer
+	max-width: 500px
+	text-align: left
+	margin: 1em auto
+	font-size: 12px	
+
+hr
+	border-bottom: none	
+	max-width: 500px
+	margin: 1em auto
+

@@ -1,0 +1,86 @@
+@import url("https://fonts.googleapis.com/css?family=Montserrat:300,900&display=swap");
+html, body {
+  margin: 0;
+  padding: 0;
+  color: #ffffff;
+  text-align: center;
+  background-color: #2d3843;
+  font-family: "Montserrat", sans-serif;
+}
+
+.data, .disk, .ram {
+  width: 80px;
+  height: 240px;
+  border-radius: 10px;
+  position: relative;
+  text-align: center;
+  font-size: 12px;
+}
+.data span, .disk span, .ram span {
+  display: inline-block;
+  margin-top: 20px;
+}
+
+.data-used, .disk-used, .ram-used {
+  width: 80px;
+  border-bottom-left-radius: 10px;
+  border-bottom-right-radius: 10px;
+  position: absolute;
+  bottom: 0;
+  height: 0;
+  transition: 1s ease;
+}
+
+.noun-box {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  max-width: 500px;
+  margin: 0 auto;
+}
+
+.ram {
+  border: 1px solid #435d6c;
+}
+
+.disk {
+  border: 1px solid #ef4b4c;
+}
+
+.data {
+  border: 1px solid #3d619b;
+}
+
+.details {
+  text-align: left;
+  max-width: 500px;
+  font-size: 12px;
+  margin: 0 auto;
+}
+
+.ram-used {
+  background-color: #435d6c;
+}
+
+.disk-used {
+  background-color: #ef4b4c;
+}
+
+.data-used {
+  background-color: #3d619b;
+}
+
+.footer {
+  max-width: 500px;
+  text-align: left;
+  margin: 1em auto;
+  font-size: 12px;
+}
+
+hr {
+  border-bottom: none;
+  max-width: 500px;
+  margin: 1em auto;
+}
+
+/*# sourceMappingURL=base.css.map */
